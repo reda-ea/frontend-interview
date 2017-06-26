@@ -61,6 +61,18 @@ class App extends Component {
     });
   }
 
+  selectVehicle(v) {
+    console.log(v);
+    if(v.route)
+      this.setState({
+        selectedRoutes: [v.route]
+      });
+    else
+      this.setState({
+        selectedRoutes: []
+      });
+  }
+
   renderVehicles() {
     return this.state.vehicles.filter(v => {
       if(_.isEmpty(this.state.selectedRoutes))
@@ -74,7 +86,7 @@ class App extends Component {
         position = estimate_position(v.prev, v);
       return <Vehicle key={v.id} label={v.label}
                       lat={position.latitude} lng={position.longitude}
-                      onClick={()=>console.log(v)}/>;
+                      onClick={() => this.selectVehicle(v)}/>;
     });
   }
 
