@@ -21,3 +21,39 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.App-last-message {
+  text-align: left;
+}
+
+.App-vehicle {
+  display: inline-block;
+  border: 1px solid darkred;
+  background-color: red;
+  border-radius: 5px;
+  padding: 2px;
+  transform: translateX(-50%), translateY(-50%);
+}
+
+.App-container-left {
+  width: 20%;
+  float: left;
+}
+
+.App-container-right {
+  width: 80%;
+  height: 600px;
+  margin-left: 20%;
+}
+
+.App-routes table {
+  border-collapse: collapse;
+}
+
+.App-routes table th {
+  padding: 0 10px;
+}
+
+.App-routes table td {
+  border-top: 1px solid black;
+}

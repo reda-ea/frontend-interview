@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "google-map-react": "^0.24.0",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.5.10",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "satori-sdk-js": "^1.0.1"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
