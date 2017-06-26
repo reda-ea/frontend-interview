@@ -34,11 +34,15 @@ export default class {
         this.lastMessage = msg;
         msg.entity.forEach(entity => {
             var vehicleData = _.assign({}, this.vehicles[entity.vehicle.vehicle.id]);
+            if(vehicleData.timestamp >= entity.vehicle.timestamp)
+                return;
             vehicleData.id = entity.vehicle.vehicle.id;
             vehicleData.label = entity.vehicle.vehicle.label;
             if (entity.vehicle.position) {
+                vehicleData.prev = _.pick(vehicleData, ['latitude', 'longitude', 'timestamp']);
                 vehicleData.latitude = entity.vehicle.position.latitude;
                 vehicleData.longitude = entity.vehicle.position.longitude;
+                vehicleData.timestamp = entity.vehicle.timestamp;
             }
             if (entity.vehicle.trip)
                 vehicleData.route = entity.vehicle.trip.route_id;

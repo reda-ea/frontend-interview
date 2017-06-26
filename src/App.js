@@ -7,6 +7,7 @@ import logo from './logo.png';
 import './App.css';
 
 import VManager from './serv/rtm';
+import estimate_position from './serv/estimate';
 import Vehicle from './comp/vehicle';
 import Routes from './comp/routes';
 
@@ -27,7 +28,7 @@ class App extends Component {
 
   componentDidMount() {
     this.manager.start();
-    this.interval = setInterval(() => this.refreshVehicleData(), 500);
+    this.interval = setInterval(() => this.refreshVehicleData(), 100);
   }
 
   componentWillUnmount() {
@@ -68,7 +69,11 @@ class App extends Component {
         return false;
       return _.includes(this.state.selectedRoutes, v.route);
     }).map(v => {
-      return <Vehicle key={v.id} lat={v.latitude} lng={v.longitude} label={v.label}
+      var position = _.pick(v, ['latitude', 'longitude'/*, 'timestamp'*/]);
+      if(v.prev && this.state.estimate)
+        position = estimate_position(v.prev, v);
+      return <Vehicle key={v.id} label={v.label}
+                      lat={position.latitude} lng={position.longitude}
                       onClick={()=>console.log(v)}/>;
     });
   }
@@ -94,6 +99,10 @@ class App extends Component {
           >
             {this.renderVehicles()}
           </GoogleMapReact>
+          <label>
+            <input type="checkbox" onChange={e => this.setState({estimate: e.target.checked})}/>
+            Estimate Vehicle locations
+          </label>
         </div>
 
       </div>
